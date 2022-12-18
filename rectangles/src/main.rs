@@ -37,8 +37,8 @@ impl Rectangle{
     fn calculate_area(&self)-> u32{
         self.width *  self.height
     }
-    fn can_hold( &self, rectangle: &Rectangle)-> bool{
-        if &rectangle.width < &self.width && &rectangle.height < &self.height {
+    fn can_hold( &self, other: &Rectangle)-> bool{
+        if other.width < self.width && other.height < self.height {
             return true
         } else {
             false
