@@ -26,10 +26,20 @@
 // }
 
 // with structs (lemme try)
+
+#[derive(Debug)]
 struct Rectangle {
     width: u32,
-    height: u32
+    height: u32,
 }
+
+impl Rectangle{
+    fn calculate_area(&self)-> u32{
+        self.width *  self.height
+    }
+}
+
+
 fn main(){
 
     let rectangle1 = Rectangle{
@@ -37,9 +47,69 @@ fn main(){
         height: 50
     };
 
+    println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle1, rectangle1.calculate_area());
+}
 
-    println!("The area is {} whatevers, since you didn't specify metrics.", calculate_area(&rectangle1));
-}
-fn calculate_area(rectangle: &Rectangle)-> u32{
-    rectangle.width *  rectangle.height
-}
+
+// fn print_rectangle(rectangle: &Rectangle){
+//     println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle, rectangle.calculate_area(&rectangle));
+// }
+
+
+
+
+
+
+// use std::io;
+
+// #[derive(Debug)]
+// struct Rectangle {
+//     width: u32,
+//     height: u32
+// }
+// fn main(){
+
+//     let rectangle1 = Rectangle{
+//         width: get_width(),
+//         height: get_height()
+//     };
+
+//     print_rectangle(&rectangle1);
+// }
+
+// fn get_width() -> u32{
+    
+//     println!("Please enter a width");
+    
+//     let mut width = String::new();
+        
+//     io::stdin()
+//     .read_line(&mut width)
+//     .expect("Failed to get a metric");
+    
+//     let width: u32 = width.trim().parse().expect("That's not a number");
+//     return width;
+// }
+
+// fn get_height() -> u32{
+    
+//     println!("Please enter a height");
+    
+//     let mut heigth = String::new();
+        
+//     io::stdin()
+//     .read_line(&mut heigth)
+//     .expect("Failed to get a metric");
+    
+//     let heigth: u32 = heigth.trim().parse().expect("That's not a number");
+//     return heigth;
+// }
+
+
+// fn calculate_area(rectangle: &Rectangle)-> u32{
+//     rectangle.width *  rectangle.height
+// }
+
+// fn print_rectangle(rectangle: &Rectangle){
+//     println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle, calculate_area(&rectangle));
+// }
