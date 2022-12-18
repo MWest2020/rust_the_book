@@ -34,40 +34,49 @@ struct Rectangle {
 }
 
 impl Rectangle{
+    fn square(size: u32) -> Self{
+        Self {
+            width: size,
+            height: size
+        }
+    }
+    fn rectangle(width : u32, height: u32)-> Self{
+        Self{
+            width,
+            height
+        }
+    }
     fn calculate_area(&self)-> u32{
         self.width *  self.height
     }
     fn can_hold( &self, other: &Rectangle)-> bool{
-        if other.width < self.width && other.height < self.height {
-            return true
-        } else {
-            false
-        }
+        other.width < self.width && other.height < self.height 
     }
 }
 
 
 fn main(){
 
-    let rectangle1 = Rectangle{
-        width: 30,
-        height: 50
-    };
+    let rectangle1 = Rectangle::rectangle(30, 50);
+    let rectangle2 = Rectangle::rectangle(20, 40);
+    let rectangle3 = Rectangle::rectangle(40, 10);
+    
+    let square1 = Rectangle::square(5);
 
-    let rectangle2 = Rectangle{
-        width: 20,
-        height: 40
-    };
-
-    let rectangle3 = Rectangle{
-        width: 40,
-        height: 10
-    };
 
     println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle1, rectangle1.calculate_area());
-    // println!("{:#?} fits in {:#?} completely: {}", rectangle2, &rectangle1, rectangle1.can_hold(&rectangle2));
-    println!("{:#?} fits in {:#?} completely: {}", rectangle3, &rectangle1, rectangle1.can_hold(&rectangle3));
+
+    print_can_hold(&rectangle2, &rectangle1, rectangle1.can_hold(&rectangle2));
+    print_can_hold(&rectangle3, &rectangle1, rectangle1.can_hold(&rectangle3));
+    print_can_hold(&square1, &rectangle1, rectangle1.can_hold(&square1));
 }
+
+// mainly done her to get a feel for borrowing. 
+fn print_can_hold(rectangle_a: &Rectangle, rectangle_b: &Rectangle, method: bool ){
+    println!("{:#?} fits in {:#?} completely: {}", &rectangle_a, &rectangle_b, &rectangle_a.can_hold(&rectangle_b));
+}
+
+
 
 // fn print_rectangle(rectangle: &Rectangle){
 //     println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle, rectangle.calculate_area(&rectangle));
