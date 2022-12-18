@@ -37,6 +37,13 @@ impl Rectangle{
     fn calculate_area(&self)-> u32{
         self.width *  self.height
     }
+    fn can_hold( &self, rectangle: &Rectangle)-> bool{
+        if &rectangle.width < &self.width && &rectangle.height < &self.height {
+            return true
+        } else {
+            false
+        }
+    }
 }
 
 
@@ -47,9 +54,20 @@ fn main(){
         height: 50
     };
 
-    println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle1, rectangle1.calculate_area());
-}
+    let rectangle2 = Rectangle{
+        width: 20,
+        height: 40
+    };
 
+    let rectangle3 = Rectangle{
+        width: 40,
+        height: 10
+    };
+
+    println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle1, rectangle1.calculate_area());
+    // println!("{:#?} fits in {:#?} completely: {}", rectangle2, &rectangle1, rectangle1.can_hold(&rectangle2));
+    println!("{:#?} fits in {:#?} completely: {}", rectangle3, &rectangle1, rectangle1.can_hold(&rectangle3));
+}
 
 // fn print_rectangle(rectangle: &Rectangle){
 //     println!("The area of {:#?} is {} whatevers, since you didn't specify metrics.", rectangle, rectangle.calculate_area(&rectangle));
