@@ -3,7 +3,7 @@ use std::io;
 fn main() {
     
     let input = get_input();
-    println!("{:?}" , input_to_oink(input));
+    println!("{:?}" , input_to_oink(&input));
 }
 
 
@@ -21,16 +21,33 @@ fn get_input() -> String{
     return input;
 }
 
-fn input_to_oink(input_string: String){
+fn input_to_oink(input_string: &str) -> Option<String>{
     
-    let mut multiple_words: Vec<String> = Vec::new();
-    const VOWELS: [&str; 5] = ["a", "e", "i", "o", "u"];
+    if input_string.is_empty(){
+        return Some(String::new());
+    }
+    
+    // vowels to byte
+    let vowels = b"aeiou";
+
+    //
+    let first_byte = input_string.as_bytes()[0];
+    if !first_byte.is_ascii_alphabetic(){
+        return None;
+    }
+    
+    // let mut multiple_words: Vec<String> = Vec::new();
+    // let mut words: Vec<&str> = input_string.split_whitespace().collect();
 
 
-    let mut words: Vec<&str> = input_string.split_whitespace().collect();
 
+    // need more imporvement for whole sentences and want any char beyond  vowel to be appended.
+    if vowels.contains(&first_byte.to_ascii_lowercase()) {
+        return Some(format!("{}-ay", input_string));
+    } else { 
+        let (first_letter, suffix) = input_string.split_at(1);
+        Some(format!("{}-{}ay", suffix, first_letter))
+    }
 
-
-    println!("{:?}", words);
-
+ 
 }
